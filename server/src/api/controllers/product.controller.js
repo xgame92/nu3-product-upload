@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {omit} = require('lodash');
+const {omit, map} = require('lodash');
 const File = require('../models/file.model');
 var path = require('path');
 var fs = require('fs');
@@ -38,9 +38,34 @@ exports.upload = async (req, res, next) => {
             }
         });
 
-
         res.status(httpStatus.CREATED);
         res.json({status: 'OK'});
+    } catch (error) {
+        next(new APIError({
+            message: error.message,
+            status: error.status,
+        }));
+    }
+};
+
+/**
+ * Get Uploaded Files
+ * @public
+ */
+exports.uploadedFiles = async (req, res, next) => {
+    try {
+        File.find({}, function (err, result) {
+            if (err) {
+                throw new APIError({
+                    message:'Internal Server Error',
+                    status: httpStatus.INTERNAL_SERVER_ERROR,
+                });
+            } else {
+                const files = map(result, (file) => omit(file.toObject(), ['_id', 'file', '__v']));
+                res.status(httpStatus.OK);
+                res.json(files);
+            }
+        });
     } catch (error) {
         next(new APIError({
             message: error.message,
