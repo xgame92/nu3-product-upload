@@ -36,4 +36,7 @@ router.route('/upload')
  router.route('/files')
      .get(productController.uploadedFiles);
 
+ router.route('/file/:fileName')
+     .get(productController.uploadedFile);
+
 module.exports = router;
