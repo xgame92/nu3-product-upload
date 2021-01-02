@@ -1,0 +1,11 @@
+{
+  "name": "nu3-de-api-server",
+  "version": "1.0.0",
+  "description": "Nu3.de API Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Yigit Tanriverdi",
+  "license": "ISC"
+}
