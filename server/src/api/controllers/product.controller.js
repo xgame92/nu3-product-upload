@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {omit, map} = require('lodash');
+const {omit, map, omitBy, isNil} = require('lodash');
 const File = require('../models/file.model');
 var path = require('path');
 var fs = require('fs');
@@ -31,7 +31,10 @@ exports.upload = async (req, res, next) => {
 
         File.create(fileObject, (err, item) => {
             if (err) {
-                console.log(err.message);
+                throw new APIError({
+                    message: 'Internal Server Error',
+                    status: httpStatus.INTERNAL_SERVER_ERROR,
+                });
             } else {
                 // Remove uploaded file from server
                 fs.unlinkSync(filePath)
@@ -57,7 +60,7 @@ exports.uploadedFiles = async (req, res, next) => {
         File.find({}, function (err, result) {
             if (err) {
                 throw new APIError({
-                    message:'Internal Server Error',
+                    message: 'Internal Server Error',
                     status: httpStatus.INTERNAL_SERVER_ERROR,
                 });
             } else {
@@ -66,6 +69,29 @@ exports.uploadedFiles = async (req, res, next) => {
                 res.json(files);
             }
         });
+    } catch (error) {
+        next(new APIError({
+            message: error.message,
+            status: error.status,
+        }));
+    }
+};
+
+
+exports.uploadedFile = async (req, res, next) => {
+    try {
+
+        let {fileName} = req.params;
+
+        const file =  await File.findOne({fileName});
+
+        res.writeHead(httpStatus.OK, {
+            'Content-Type': file.mimeType,
+            'Content-disposition': 'attachment;filename=' + file.originalFileName,
+            'Content-Length': file.file.data.length
+        });
+
+        res.end(Buffer.from(file.file.data, 'binary'));
     } catch (error) {
         next(new APIError({
             message: error.message,
