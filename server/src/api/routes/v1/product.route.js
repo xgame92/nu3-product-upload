@@ -10,7 +10,11 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
-        if (!(file.mimetype === 'application/xml' || file.mimetype === 'text/csv')) {
+        if (!(
+            file.mimetype === 'application/xml'||
+            file.mimetype === 'text/xml' ||
+            file.mimetype === 'text/csv' ||
+            file.mimetype === 'application/vnd.ms-excel')) {
 
             cb(new APIError({
                 message: 'Unsupported Media Type',
