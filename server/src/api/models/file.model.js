@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var fileSchema = new mongoose.Schema({
+let fileSchema = new mongoose.Schema({
     originalFileName: String,
     fileName: String,
     mimeType: String,
@@ -15,6 +15,7 @@ var fileSchema = new mongoose.Schema({
 });
 
 fileSchema.statics = {};
+
 /**
  * @typedef File
  */

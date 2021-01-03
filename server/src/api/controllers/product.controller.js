@@ -2,10 +2,10 @@ const httpStatus = require('http-status');
 const {omit, map} = require('lodash');
 const File = require('../models/file.model');
 const Product = require('../models/product.model');
-var path = require('path');
-var fs = require('fs');
+const path = require('path');
+const fs = require('fs');
 const APIError = require('../utils/APIError');
-var parser = require('xml2json');
+const parser = require('xml2json');
 const csv = require('csvtojson')
 /**
  * Upload Product xml or inventory csv files
@@ -14,12 +14,12 @@ const csv = require('csvtojson')
 exports.upload = async (req, res, next) => {
     try {
 
-        var filePath = path.join(__dirname, '../../..', '/uploads/' + req.file.filename);
-        var mimeType = req.file.mimetype;
-        var fileName = req.file.filename;
-        var originalFileName = req.file.originalname;
+        const filePath = path.join(__dirname, '../../..', '/uploads/' + req.file.filename);
+        const mimeType = req.file.mimetype;
+        const fileName = req.file.filename;
+        const originalFileName = req.file.originalname;
 
-        var fileObject = new File({
+        const fileObject = new File({
             originalFileName: originalFileName,
             fileName: fileName,
             mimeType: mimeType,
@@ -34,9 +34,9 @@ exports.upload = async (req, res, next) => {
 
             fs.readFile(filePath, function (err, data) {
 
-                jsonProductsObject = JSON.parse(parser.toJson(data, {reversible: true}));
+                let jsonProductsObject = JSON.parse(parser.toJson(data, {reversible: true}));
 
-                var mappedProductsData = MapToProductObject(jsonProductsObject.products.product);
+                const mappedProductsData = MapToProductObject(jsonProductsObject.products.product);
 
                 mappedProductsData.forEach(product => {
                     Product.updateOne({id: product.id}, product, {upsert: true, setDefaultsOnInsert: true}).exec();
@@ -59,10 +59,10 @@ exports.upload = async (req, res, next) => {
             });*/
         }
 
-        File.create(fileObject, (err, item) => {
+        await File.create(fileObject, (err) => {
             if (err) {
                 throw new APIError({
-                    message: 'Internal Server Error',
+                    message: err.message,
                     status: httpStatus.INTERNAL_SERVER_ERROR,
                 });
             } else {
@@ -132,7 +132,6 @@ exports.uploadedFile = async (req, res, next) => {
         }));
     }
 };
-
 
 function MapToProductObject(products) {
     return map(products, (product) => {

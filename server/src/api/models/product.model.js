@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var productSchema = new mongoose.Schema({
+let productSchema = new mongoose.Schema({
     id: {
         type: "Number",
         required: true,
@@ -62,6 +62,7 @@ var productSchema = new mongoose.Schema({
 });
 
 productSchema.statics = {};
+
 /**
  * @typedef Product
  */
