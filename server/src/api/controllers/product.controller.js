@@ -30,7 +30,7 @@ exports.upload = async (req, res, next) => {
         });
 
         // TODO Save xml or csv file and do the logic
-        if (mimeType === 'application/xml') {
+        if (mimeType === 'application/xml' || mimeType === 'text/xml') {
 
             fs.readFile(filePath, function (err, data) {
 
@@ -45,7 +45,7 @@ exports.upload = async (req, res, next) => {
             });
         }
 
-        if (mimeType === 'text/csv') {
+        if (mimeType === 'text/csv' || mimeType === 'application/vnd.ms-excel') {
             // TODO add or update Inventory csv data
             const jsonArray = await csv({
                 trim: true,
