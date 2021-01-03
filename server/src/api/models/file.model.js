@@ -4,15 +4,17 @@ var fileSchema = new mongoose.Schema({
     originalFileName: String,
     fileName: String,
     mimeType: String,
-    file:
-        {
-            data: Buffer,
-            contentType: String
-        }
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    file: {
+        data: Buffer,
+        contentType: String
+    }
 });
 
-fileSchema.statics = {
-};
+fileSchema.statics = {};
 /**
  * @typedef File
  */
