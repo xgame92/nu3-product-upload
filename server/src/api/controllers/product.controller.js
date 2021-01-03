@@ -47,7 +47,7 @@ exports.upload = async (req, res, next) => {
         }
 
         if (mimeType === 'text/csv' || mimeType === 'application/vnd.ms-excel') {
-            // TODO add or update Inventory csv data
+
             const jsonArray = await csv({
                 trim: true,
                 output: 'json',
