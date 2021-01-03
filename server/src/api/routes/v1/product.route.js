@@ -3,9 +3,9 @@ const productController = require('../../controllers/product.controller');
 const httpStatus = require('http-status');
 const APIError = require('../../utils/APIError');
 
-var multer = require('multer');
+let multer = require('multer');
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')
     },
@@ -26,7 +26,7 @@ var storage = multer.diskStorage({
     }
 });
 
-var upload = multer({storage: storage})
+const upload = multer({storage: storage})
 
 const router = express.Router();
 
