@@ -1,10 +1,12 @@
 const httpStatus = require('http-status');
-const {omit, map, omitBy, isNil} = require('lodash');
+const {omit, map} = require('lodash');
 const File = require('../models/file.model');
+const Product = require('../models/product.model');
 var path = require('path');
 var fs = require('fs');
 const APIError = require('../utils/APIError');
-
+var parser = require('xml2json');
+const csv = require('csvtojson')
 /**
  * Upload Product xml or inventory csv files
  * @public
@@ -28,6 +30,34 @@ exports.upload = async (req, res, next) => {
         });
 
         // TODO Save xml or csv file and do the logic
+        if (mimeType === 'application/xml') {
+
+            fs.readFile(filePath, function (err, data) {
+
+                jsonProductsObject = JSON.parse(parser.toJson(data, {reversible: true}));
+
+                var mappedProductsData = MapToProductObject(jsonProductsObject.products.product);
+
+                mappedProductsData.forEach(product => {
+                    Product.updateOne({id: product.id}, product, {upsert: true, setDefaultsOnInsert: true}).exec();
+                });
+
+            });
+        }
+
+        if (mimeType === 'text/csv') {
+            // TODO add or update Inventory csv data
+            const jsonArray = await csv({
+                trim: true,
+                output: 'json',
+                delimiter: [";"]
+            }).fromFile(filePath);
+
+            /*var mappedCsv = map(jsonArray, (csvItem) => {
+                csvItem.amount = parseFloat(csvItem.amount.replace(",", "."));
+                Product.updateOne({handle: csvItem.handle}, {$set: {amount:  csvItem.amount}})
+            });*/
+        }
 
         File.create(fileObject, (err, item) => {
             if (err) {
@@ -77,13 +107,16 @@ exports.uploadedFiles = async (req, res, next) => {
     }
 };
 
-
+/**
+ * Get Uploaded File
+ * @public
+ */
 exports.uploadedFile = async (req, res, next) => {
     try {
 
         let {fileName} = req.params;
 
-        const file =  await File.findOne({fileName});
+        const file = await File.findOne({fileName});
 
         res.writeHead(httpStatus.OK, {
             'Content-Type': file.mimeType,
@@ -99,3 +132,31 @@ exports.uploadedFile = async (req, res, next) => {
         }));
     }
 };
+
+
+function MapToProductObject(products) {
+    return map(products, (product) => {
+            return {
+                id: product['id']['$t'],
+                title: product['title']['$t'],
+                bodyHtml: product['body-html']['$t'],
+                vendor: product['vendor']['$t'],
+                productType: product['product-type']['$t'],
+                createdAt: product['created-at']['$t'],
+                handle: product['handle']['$t'],
+                publishedScope: product['published-scope']['$t'],
+                tags: product['tags']['$t'],
+                image: {
+                    id: product['image']['id']['$t'],
+                    productId: product['image']['product-id']['$t'],
+                    createdAt: product['image']['created-at']['$t'],
+                    updatedAt: product['image']['updated-at']['$t'],
+                    alt: product.image?.alt?.nil,
+                    width: product['image']['width']['$t'],
+                    height: product['image']['height']['$t'],
+                    src: product['image']['src']['$t'],
+                }
+            };
+        }
+    );
+}

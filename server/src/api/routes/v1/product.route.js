@@ -33,10 +33,10 @@ const router = express.Router();
 router.route('/upload')
     .post(upload.single('file'), productController.upload);
 
- router.route('/files')
-     .get(productController.uploadedFiles);
+router.route('/files')
+    .get(productController.uploadedFiles);
 
- router.route('/file/:fileName')
-     .get(productController.uploadedFile);
+router.route('/file/:fileName')
+    .get(productController.uploadedFile);
 
 module.exports = router;
