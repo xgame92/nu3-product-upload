@@ -21,5 +21,9 @@ module.exports = {
         username: process.env.EMAIL_USERNAME,
         password: process.env.EMAIL_PASSWORD,
     },
-    mongooseDebug: true
+    mongooseDebug: true,
+    clientURL: process.env.CLIENT_URL,
+    githubCallbackURL: process.env.GITHUB_CALLBACK_URL,
+    githubClientID: process.env.GITHUB_CLIENT_ID,
+    githubClientSecret: process.env.GITHUB_CLIENT_SECRET
 };

@@ -72,13 +72,13 @@ export default {
       'uploadFile',
       'getUploadedFiles'
     ]),
-    onSubmit(event) {
-      var bodyFormData = new FormData();
+    onSubmit() {
+      let bodyFormData = new FormData();
       bodyFormData.append('file', this.form.uploadedFile);
       this.form.uploadedFile = [];
       this.uploadFile(bodyFormData);
     },
-    onReset(event) {
+    onReset() {
       this.form.uploadedFile = [];
     },
     downloadFile(fileName) {

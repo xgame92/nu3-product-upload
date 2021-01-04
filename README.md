@@ -50,10 +50,10 @@ GET // http://localhost:3000/v1/products/file/{xml-or-csv-file-name}
 - [x] create API for list uploaded products
 - [x] create API for get uploaded product
 - [x] create API for upload product.xml and inventory.csv
-- [ ] create Vue.js UI
-- [ ] create UI for upload product.xml and inventory.csv
+- [x] create Vue.js UI
+- [x] create UI for upload product.xml and inventory.csv
 - [ ] add unit tests
-- [ ] Passwordless authentication With a single use code to given email or github account
+- [x] Passwordless authentication With a single use code to given email or github account
 - [ ] add automated tests
 - [ ] add webhooks (A request to given url after every single row update.These requests should be sent only for changed rows.You can use https://requestbin.com/ for testing)
 
