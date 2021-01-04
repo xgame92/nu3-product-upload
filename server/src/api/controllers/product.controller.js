@@ -9,6 +9,7 @@ const APIError = require('../utils/APIError');
 const parser = require('xml2json');
 const csv = require('csvtojson')
 const {MapToProductObject} = require('../utils/ProductMapper')
+
 /**
  * Upload Product xml or inventory csv files
  * @public
@@ -105,6 +106,7 @@ exports.uploadedFiles = async (req, res, next) => {
                 });
             } else {
                 const files = map(result, (file) => omit(file.toObject(), ['_id', 'file', '__v']));
+
                 res.status(httpStatus.OK);
                 res.json(files);
             }
