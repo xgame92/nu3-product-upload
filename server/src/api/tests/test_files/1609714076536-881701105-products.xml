@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product>
+        <id type="integer">4365897498705</id>
+        <title>2 x BEAVITA Vitalkost + InShape-Biomed® Schokolade, Pulver</title>
+        <body-html>2 x BEAVITA Vitalkost plus InShape-Biomed® Schokolade, Pulver: Die ausgewählten Diät-Shakes für deinen Weg zur Traumfigur - hier bei nur bestellen.</body-html>
+        <vendor>Biomed</vendor>
+        <product-type>Slimming</product-type>
+        <created-at type="dateTime">2019-11-11T21:51:52+01:00</created-at>
+        <handle>2-x-beavita-vitalkost-plus-inshape-biomed-schokolade</handle>
+        <published-scope>web</published-scope>
+        <tags>ingredients_no_gelatine, ingredients_no_gluten, ingredients_no_preservatives, ingredients_vegetarian, tax_reduced</tags>
+        <image>
+            <id type="integer">16308454621265</id>
+            <product-id type="integer">4365897498705</product-id>
+            <created-at type="dateTime">2020-12-19T04:02:33+01:00</created-at>
+            <updated-at type="dateTime">2020-12-19T04:02:33+01:00</updated-at>
+            <width type="integer">522</width>
+            <height type="integer">500</height>
+            <src>https://cdn.shopify.com/s/files/1/0095/2274/1329/products/9_252Fe_252Ff_252Fd_252F9efd51ce2c9968f559f7fa5dfbc249b95c9c2245_17478_c596897e-1f55-42f4-a71d-3b2d5a16371c.jpg?v=1608346953</src>
+        </image>
+    </product>
+    <product>
+        <id type="integer">4364772507729</id>
+        <title>nu3 Beef Jerky</title>
+        <body-html>nu3 Beef Jerky: Dein herzhafter Protein-Snack aus hochwertigem Rindfleisch und pikanten Gewürzen. Jetzt nu3 Trockenfleisch bestellen!</body-html>
+        <vendor>nu3</vendor>
+        <product-type>Sports</product-type>
+        <created-at type="dateTime">2019-11-11T12:09:53+01:00</created-at>
+        <handle>nu3-beef-jerky</handle>
+
+        <published-scope>web</published-scope>
+        <tags>badge_several_variants, ingredients_no_aspartam, ingredients_no_flavour_enhancers, ingredients_no_gelatine, ingredients_no_gluten, ingredients_no_preservatives, quality_natural_ingredients, tax_reduced</tags>
+        <image>
+            <id type="integer">16307199311953</id>
+            <product-id type="integer">4364772507729</product-id>
+            <position type="integer">1</position>
+            <created-at type="dateTime">2020-12-18T22:02:13+01:00</created-at>
+            <updated-at type="dateTime">2020-12-18T22:02:13+01:00</updated-at>
+            <alt nil="true"/>
+            <width type="integer">4472</width>
+            <height type="integer">4472</height>
+            <src>https://cdn.shopify.com/s/files/1/0095/2274/1329/products/7_252Ff_252Fa_252Fe_252F7fae67ec36afaec18fd5cc3b6c5e163a5c295691_nu3_beef_jerky_06d91726-7775-484e-adf8-3e5f1be3109d.jpg?v=1608325333</src>
+        </image>
+    </product>
+</products>
