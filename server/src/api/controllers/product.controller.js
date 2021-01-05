@@ -129,7 +129,12 @@ exports.uploadedFile = async (req, res, next) => {
         let {fileName} = req.params;
 
         const file = await File.findOne({fileName});
-
+        if(file === null){
+            throw new APIError({
+                message: 'File Not Found',
+                status: httpStatus.NO_CONTENT,
+            });
+        }
         res.writeHead(httpStatus.OK, {
             'Content-Type': file.mimeType,
             'Content-disposition': 'attachment;filename=' + file.originalFileName,
