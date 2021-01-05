@@ -5,7 +5,7 @@ Crate SPA application where we can upload xml or csv files and write them to a d
 
 ## Express.js API Requirements
 
-- [Node v7.6+](https://nodejs.org/en/download/current/) or [Docker](https://www.docker.com/)
+- [Node v7.6+](https://nodejs.org/en/download/current/) 
 - [Yarn](https://yarnpkg.com/en/docs/install)
 
 #### Install dependencies:
@@ -88,7 +88,16 @@ GET // http://localhost:3000/v1/products/file/{xml-or-csv-file-name}
 - [ ] add automated tests
 - [ ] add webhooks (A request to given url after every single row update.These requests should be sent only for changed rows.You can use https://requestbin.com/ for testing)
 
-#### Code Coverage:
+### SPA UI:
+![Alt text](home-page.png?raw=true "Title")
+
+---
+
+![Alt text](file-upload-page.png?raw=true "Title")
+
+---
+
+### Code Coverage:
 ![Alt text](code-coverage.png?raw=true "Title")
 ![Alt text](code-coverage-tests.png?raw=true "Title")
 
